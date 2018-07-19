@@ -64,14 +64,12 @@ section {
 	display: block;
 }
 
-/* TODO: change to class name or tag */
-#maincontent {
+main {
   background-color: #f3f3f3;
   min-height: 100%;
 }
 
-/* TODO: change to class name or tag */
-#footer {
+footer {
   background-color: #444;
   color: #aaa;
   font-size: 8pt;
@@ -101,7 +99,10 @@ nav h1 a {
   text-transform: uppercase;
 }
 
-/* TODO: change to class name or tag */
+/*
+ Better to leave as id because we are referencing to this element from
+ JS code
+*/
 #breadcrumb {
     padding: 10px 40px 16px;
     list-style: none;
@@ -112,13 +113,11 @@ nav h1 a {
 }
 
 /* Display list items side by side */
-/* TODO: change to class name or tag */
 #breadcrumb li {
     display: inline;
 }
 
 /* Add a slash symbol (/) before/behind each list item */
-/* TODO: change to class name or tag */
 #breadcrumb li+li:before {
     padding: 8px;
     color: black;
@@ -126,14 +125,12 @@ nav h1 a {
 }
 
 /* Add a color to all links inside the list */
-/* TODO: change to class name or tag */
 #breadcrumb li a {
     color: #0275d8;
     text-decoration: none;
 }
 
 /* Add a color on mouse-over */
-/* TODO: change to class name or tag */
 #breadcrumb li a:hover {
     color: #01447e;
     text-decoration: underline;
