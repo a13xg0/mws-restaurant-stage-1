@@ -73,10 +73,6 @@ main {
   flex-wrap: wrap;
 }
 
-.inside main {
-  display: block; /* Safari */
-}
-
 footer {
   background-color: #444;
   color: #aaa;
@@ -158,9 +154,10 @@ nav h1 a {
  JS code
 */
 #map {
-  height: 400px;
-  width: 100%;
-  background-color: #ccc;
+    height: 400px;
+    width: 100%;
+    background-color: #ccc;
+    z-index: 0;
 }
 
 /* On detail view make part of footer */
@@ -275,14 +272,6 @@ nav h1 a {
   z-index: 1000;
 }
 
-.inside .map-container {
-  background: blue none repeat scroll 0 0;
-  height: calc(100% - 145px);
-  position: fixed;
-  right: 0;
-  top: 80px;
-  width: 50%;
-}
 
 .inside #map {
   background-color: #ccc;
@@ -392,9 +381,11 @@ nav h1 a {
 
 @media screen and (max-width: 700px) {
     /* Remove map on small screen */
-    .inside .map-container {
+    .map-container {
         display: none;
     }
+
+
 
     #breadcrumb {
       width: 100%;
@@ -409,19 +400,58 @@ nav h1 a {
       padding: 30px 15px 0;
     }
 
+    .inside .map-container {
+        display: block;
+        margin-top: 140px;
+    }
+
+    .inside .map-container .map-placeholder {
+        display:none;
+    }
+
+    .map-spacer {
+        display: none;
+    }
+
+    .inside #restaurant-container {
+        padding-top: 30px;
+    }
+
 }
 
 @media screen and (min-width: 701px) {
   /* enable a two-column layout in the restaurant list */
-  #restaurants-list {
-    display: flex;
-    flex-wrap: wrap;
-  }
+    #restaurants-list {
+        display: flex;
+        flex-wrap: wrap;
+    }
 
-  #restaurants-list li {
-    width: calc(50% - 30px);
+    #restaurants-list li {
+        width: calc(50% - 30px);
+    }
 
-  }
+
+    .inside .map-container {
+        background: blue none repeat scroll 0 0;
+        height: calc(100% - 145px);
+        position: fixed;
+        right: 0;
+        top: 80px;
+        width: 50%;
+    }
+
+   .map-spacer {
+        width: 50%;
+        order: 1;
+    }
+
+    .inside #restaurant-container {
+        order: 0;
+    }
+
+    .inside #reviews-container {
+        order: 2;
+    }
 }
 
 @media screen and (min-width: 1201px) {
