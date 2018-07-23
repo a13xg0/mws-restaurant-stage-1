@@ -13,8 +13,8 @@ p{
 
 body {
 	background-color: #fdfdfd;
-	margin: 0;
 	position:relative;
+    margin: 0;
 }
 
 ul,
@@ -73,14 +73,19 @@ main {
   flex-wrap: wrap;
 }
 
+.inside main {
+  display: block; /* Safari */
+}
+
 footer {
   background-color: #444;
   color: #aaa;
   font-size: 8pt;
   letter-spacing: 1px;
-  padding: 25px;
+  padding: 25px 0;
   text-align: center;
   text-transform: uppercase;
+  position: relative;
 }
 
 /* ====================== Navigation ====================== */
@@ -158,6 +163,14 @@ nav h1 a {
   background-color: #ccc;
 }
 
+/* On detail view make part of footer */
+.map-placeholder {
+  background-color: #444;
+  font-size: 8pt;
+  height: 1.4em;
+  padding: 25px 0;
+  width: 100%;
+}
 /* ====================== Restaurant Filtering ====================== */
 
 .search-wrapper {
@@ -213,8 +226,7 @@ nav h1 a {
   box-sizing: border-box;
 }
 
-/* TODO: change to class name or tag */
-#restaurants-list .restaurant-img {
+.restaurant-img {
   background-color: #ccc;
   display: block;
   margin: 0;
@@ -298,41 +310,35 @@ nav h1 a {
 }
 
 /* TODO: change to class name or tag */
-#restaurant-img {
-	width: 90%;
-}
-
-/* TODO: change to class name or tag */
 #restaurant-address {
   font-size: 12pt;
-  margin: 10px 0px;
+  margin: 10px 0;
 }
 
-/* TODO: change to class name or tag */
 #restaurant-cuisine {
   background-color: #333;
   color: #ddd;
   font-size: 12pt;
   font-weight: 300;
   letter-spacing: 10px;
-  margin: 0 0 20px;
+  margin: 10px 0 20px;
   padding: 2px 0;
   text-align: center;
   text-transform: uppercase;
-	width: 90%;
+
 }
 
 /* TODO: change to class name or tag */
 #restaurant-container, #reviews-container {
   border-bottom: 1px solid #d9d9d9;
   border-top: 1px solid #fff;
-  padding: 140px 40px 30px;
-  width: calc(50% - 80px);
+  padding: 140px 30px 30px;
+  width: 50%;
+  box-sizing: border-box;
 }
 
-/* TODO: change to class name or tag */
 #reviews-container {
-  padding: 30px 40px 80px;
+  padding: 30px 30px 0;
 }
 
 /* TODO: change to class name or tag */
@@ -353,14 +359,13 @@ nav h1 a {
 /* TODO: change to class name or tag */
 #reviews-list li {
   background-color: #fff;
-    border: 2px solid #f3f3f3;
+  border: 2px solid #f3f3f3;
   display: block;
   list-style-type: none;
   margin: 0 0 30px;
   overflow: hidden;
-  padding: 0 20px 20px;
+  padding: 20px;
   position: relative;
-  width: 85%;
 }
 
 /* TODO: change to class name or tag */
@@ -382,6 +387,7 @@ nav h1 a {
   .filter-options select {
     width: 200px;
   }
+
 }
 
 @media screen and (max-width: 700px) {
@@ -395,6 +401,39 @@ nav h1 a {
     }
 
     #restaurant-container, #reviews-container {
+      padding: 140px 15px 30px;
       width: 100%;
     }
+
+    #reviews-container {
+      padding: 30px 15px 0;
+    }
+
 }
+
+@media screen and (min-width: 701px) {
+  /* enable a two-column layout in the restaurant list */
+  #restaurants-list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  #restaurants-list li {
+    width: calc(50% - 30px);
+
+  }
+}
+
+@media screen and (min-width: 1201px) {
+  /* enable a three-column layout in the restaurant list */
+  #restaurants-list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  #restaurants-list li {
+    width: calc(33% - 30px);
+
+  }
+}
+
