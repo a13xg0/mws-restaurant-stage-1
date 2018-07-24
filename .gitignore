@@ -28,3 +28,6 @@ Temporary Items
 
 ### Remove all Intellij Stuffs
 .idea/
+
+
+node_modules
