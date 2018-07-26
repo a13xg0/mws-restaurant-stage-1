@@ -29,7 +29,7 @@ class PictureHelper {
 
         // create fallback image
         const image = document.createElement('img');
-        image.className = 'restaurant-img';
+        image.className = 'restaurant-img photo';
         image.src = DBHelper.imageUrlForRestaurant(restaurantInfo);
         image.alt = restaurantInfo.photo_alt;
         image.title = restaurantInfo.name;

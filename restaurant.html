@@ -13,7 +13,7 @@
 
 <body class="inside">
   <!-- Beginning header -->
-  <header>
+  <header class="page-header">
     <!-- Beginning nav -->
     <nav>
       <h1><a href="/">Restaurant Reviews</a></h1>
@@ -36,13 +36,13 @@
     </aside>
     <!-- End map -->
     <!-- Beginning restaurant -->
-    <section id="restaurant-container">
-      <h3 id="restaurant-name"></h3>
-      <picture id="restaurant-img">
+    <section id="restaurant-container" class="vcard">
+      <h3 id="restaurant-name" class="fn org"></h3>
+      <picture id="restaurant-img" class="photo">
       </picture>
       <p id="restaurant-cuisine" aria-describedby="restaurant-cuisine-description"></p>
       <p id="restaurant-cuisine-description"></p>
-      <p id="restaurant-address"></p>
+      <p id="restaurant-address" class="adr street-address"></p>
       <table id="restaurant-hours"></table>
     </section>
     <div class="map-spacer"></div>

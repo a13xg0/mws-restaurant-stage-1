@@ -108,20 +108,49 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
  * Create restaurant operating hours HTML table and add it to the webpage.
  */
 fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hours) => {
-  const hours = document.getElementById('restaurant-hours');
+  const hoursTable = document.getElementById('restaurant-hours');
   for (let key in operatingHours) {
     if (operatingHours.hasOwnProperty(key)) {
         const row = document.createElement('tr');
+        row.setAttribute('itemprop', 'openingHoursSpecification');
+        row.setAttribute('itemscope', '');
+        row.setAttribute('itemtype', 'http://schema.org/OpeningHoursSpecification');
 
         const day = document.createElement('td');
         day.innerHTML = key;
+        day.setAttribute('itemprop', 'dayOfWeek');
         row.appendChild(day);
 
         const time = document.createElement('td');
-        time.innerHTML = operatingHours[key];
-        row.appendChild(time);
+        const periods = operatingHours[key].split(',');
+        periods.map(e => e.trim());
+        periods.forEach((e, i) => {
+          const hours = e.split('-');
+          hours.map(e => e.trim());
 
-        hours.appendChild(row);
+          const opens = document.createElement('time');
+          opens.setAttribute('itemprop', 'opens');
+          opens.innerHTML = hours[0];
+          time.appendChild(opens);
+
+          const separator = document.createElement('span');
+          separator.innerHTML = ' - ';
+          time.append(separator);
+
+          const closes = document.createElement('time');
+          closes.setAttribute('itemprop', 'closes');
+          closes.innerHTML = hours[1];
+          time.appendChild(closes);
+
+          if (i < periods.length - 1) {
+              const period = document.createElement('span');
+              period.innerHTML = ', ';
+              time.append(period);
+          }
+        });
+
+        row.appendChild(time);
+        hoursTable.appendChild(row);
     }
   }
 };
@@ -129,7 +158,7 @@ fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hours) => 
 /**
  * Create all reviews HTML and add them to the webpage.
  */
-fillReviewsHTML = (reviews = self.restaurant.reviews) => {
+fillReviewsHTML = (reviews = self.restaurant.reviews, restaurantName = self.restaurant.name) => {
   const container = document.getElementById('reviews-container');
   const title = document.createElement('h2');
   title.innerHTML = 'Reviews';
@@ -143,7 +172,7 @@ fillReviewsHTML = (reviews = self.restaurant.reviews) => {
   }
   const ul = document.getElementById('reviews-list');
   reviews.forEach(review => {
-    ul.appendChild(createReviewHTML(review));
+    ul.appendChild(createReviewHTML(review, restaurantName));
   });
   container.appendChild(ul);
 };
@@ -151,26 +180,47 @@ fillReviewsHTML = (reviews = self.restaurant.reviews) => {
 /**
  * Create review HTML and add it to the webpage.
  */
-createReviewHTML = (review) => {
+createReviewHTML = (review, restaurantName) => {
   const li = document.createElement('li');
-  const name = document.createElement('p');
+  li.className = 'hreview';
+
+  const header = document.createElement('header');
+  header.className = 'user-review-header';
+  const vcard = document.createElement('span');
+  vcard.className = 'item-hidden item vcard';
+
+  const restaurantNameContainer = document.createElement('span');
+  restaurantNameContainer.className = 'item-hidden fn org';
+  restaurantNameContainer.innerHTML = restaurantName;
+    vcard.appendChild(restaurantNameContainer);
+
+    const categoryName = document.createElement('span');
+    categoryName.className = 'item-hidden category';
+    categoryName.innerHTML = 'Restaurant';
+    vcard.appendChild(categoryName);
+
+    header.appendChild(vcard);
+
+  const name = document.createElement('span');
   name.innerHTML = review.name;
-  name.className = 'user-review-name';
-  li.appendChild(name);
+  name.className = 'user-review-name reviewer vcard';
+    header.appendChild(name);
 
   const date = document.createElement('time');
   date.innerHTML = review.date;
-  date.className = 'user-review-date';
-  name.appendChild(date);
+  date.className = 'user-review-date dtreviewed';
+    header.appendChild(date);
+
+    li.appendChild(header);
 
   const rating = document.createElement('p');
   rating.innerHTML = `Rating: ${review.rating}`;
-  rating.className = 'user-review-rating';
+  rating.className = 'user-review-rating rating';
   li.appendChild(rating);
 
   const comments = document.createElement('article');
   comments.innerHTML = review.comments;
-  comments.className = 'user-review-comment';
+  comments.className = 'user-review-comment summary';
   li.appendChild(comments);
 
   return li;

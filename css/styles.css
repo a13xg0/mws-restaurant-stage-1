@@ -267,8 +267,12 @@ nav h1 a {
 .search-form-label {
     display: none;
 }
+
+.item-hidden {
+    display: none;
+}
 /* ====================== Restaurant Details ====================== */
-.inside header {
+.inside .page-header {
   position: fixed;
   top: 0;
   width: 100%;
@@ -365,18 +369,23 @@ nav h1 a {
   color: #666;
 }
 
-.user-review-name {
+.user-review-header {
     line-height: 1.2em;
     background-color: #222;
-    color: white;
     margin: 0;
     padding: 10px;
+}
+
+.user-review-name {
+    color: white;
+    font-size: 14pt;
 }
 
 .user-review-date {
     float: right;
     color: #ccc;
     font-size: 12pt;
+    line-height: 1.4em;
 }
 
 .user-review-rating {

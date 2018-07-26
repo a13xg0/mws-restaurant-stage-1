@@ -158,21 +158,25 @@ fillRestaurantsHTML = (restaurants = self.restaurants) => {
  */
 createRestaurantHTML = (restaurant) => {
   const li = document.createElement('li');
+  li.className = 'vcard';
 
   const picture = document.createElement('picture');
   PictureHelper.constructPictureTag(picture, restaurant);
   li.append(picture);
 
-    const name = document.createElement('h1');
+    const name = document.createElement('h2');
+    name.className = 'fn org';
   name.innerHTML = restaurant.name;
   li.append(name);
 
   const neighborhood = document.createElement('p');
   neighborhood.innerHTML = restaurant.neighborhood;
+  neighborhood.className = 'locality';
   li.append(neighborhood);
 
   const address = document.createElement('p');
   address.innerHTML = restaurant.address;
+  address.className = 'adr street-address';
   li.append(address);
 
   const more = document.createElement('a');
