@@ -93,6 +93,9 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   const cuisine = document.getElementById('restaurant-cuisine');
   cuisine.innerHTML = restaurant.cuisine_type;
 
+    const cuisineDescr = document.getElementById('restaurant-cuisine-description');
+    cuisineDescr.innerHTML = `This restaurant provides ${restaurant.cuisine_type} cuisine`;
+
   // fill operating hours
   if (restaurant.operating_hours) {
     fillRestaurantHoursHTML();
@@ -152,18 +155,22 @@ createReviewHTML = (review) => {
   const li = document.createElement('li');
   const name = document.createElement('p');
   name.innerHTML = review.name;
+  name.className = 'user-review-name';
   li.appendChild(name);
 
-  const date = document.createElement('p');
+  const date = document.createElement('time');
   date.innerHTML = review.date;
-  li.appendChild(date);
+  date.className = 'user-review-date';
+  name.appendChild(date);
 
   const rating = document.createElement('p');
   rating.innerHTML = `Rating: ${review.rating}`;
+  rating.className = 'user-review-rating';
   li.appendChild(rating);
 
-  const comments = document.createElement('p');
+  const comments = document.createElement('article');
   comments.innerHTML = review.comments;
+  comments.className = 'user-review-comment';
   li.appendChild(comments);
 
   return li;
