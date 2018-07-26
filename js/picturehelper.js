@@ -12,7 +12,7 @@ class PictureHelper {
      */
     static constructPictureTag(pictureElement, restaurantInfo) {
         // These two sources works well on both pages pig and small, because on both of them we fall on two-columns
-        // layout after 700px  we didn't add third source bacuse it is usable for desktop devices, where bandwidth are
+        // layout after 700px  we didn't add third source because it is usable for desktop devices, where bandwidth are
         // not limited and third condition of switching would add redundant complexity
 
         const sourceSmall = document.createElement('source');
