@@ -154,6 +154,14 @@ class DBHelper {
     }
 
     /**
+     * Restaurant loq quality image fallback URL.
+     */
+    static imageLQUrlForRestaurant(restaurant) {
+        return (`/img/${restaurant.photograph}-low.jpg`);
+    }
+
+
+    /**
      * Restaurant image srcset
      */
 
