@@ -42,6 +42,10 @@ class PictureHelper {
 
     }
 
+    /**
+     * Event handler for first variant loaded images. It switch to full quality content after blurred loading is done
+     * @param event
+     */
     static lazyLoadImage(event) {
         let el = event.srcElement;
 
@@ -50,22 +54,6 @@ class PictureHelper {
             el.removeAttribute('data-src');
         };
         [].forEach.call(el.parentElement.querySelectorAll('source[data-srcset]'), function(srcset) {
-            srcset.setAttribute('srcset', srcset.getAttribute('data-srcset'));
-            srcset.onload = function() {
-                srcset.removeAttribute('data-srcset');
-            };
-        });
-    }
-
-    static lazyLoadImages() {
-        [].forEach.call(document.querySelectorAll('img[data-src]'), function(img) {
-            img.setAttribute('src', img.getAttribute('data-src'));
-            img.onload = function() {
-                img.removeAttribute('data-src');
-            };
-        });
-
-        [].forEach.call(document.querySelectorAll('source[data-srcset]'), function(srcset) {
             srcset.setAttribute('srcset', srcset.getAttribute('data-srcset'));
             srcset.onload = function() {
                 srcset.removeAttribute('data-srcset');
