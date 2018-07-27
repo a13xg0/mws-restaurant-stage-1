@@ -106,7 +106,6 @@ function serveMapTiles(request) {
                     return response
                 }
             }
-            ;
 
             return fetch(request).then(function (networkResponse) {
                 cache.put(request.url, networkResponse.clone());
