@@ -60,4 +60,43 @@ class PictureHelper {
             };
         });
     }
+
+    /**
+     * Prefetch images after first load
+     * @param restaurants
+     */
+    static forwardCacheImages(restaurants) {
+        const contentImgsCache = 'rest1-content-imgs';
+
+        let imagesToCache = [];
+
+        restaurants.forEach((item) => {
+            imagesToCache.push(DBHelper.imageLQUrlForRestaurant(item));
+            imagesToCache.push(`img/${item.photograph}-400_1x.jpg`);
+            imagesToCache.push(`img/${item.photograph}-800_1x.jpg`);
+            imagesToCache.push(`img/${item.photograph}-800_2x.jpg`);
+            imagesToCache.push(`img/${item.photograph}-1600_2x.jpg`);
+        });
+
+        caches.open(contentImgsCache).then((cache) => {
+
+            imagesToCache.forEach((url) => {
+                const storageUrl = url.replace(/-\d*_\dx\.jpg$/, '');
+
+
+                return cache.match(storageUrl).then(function (response) {
+                    if (response) return response;
+
+                    return fetch(url).then(function (networkResponse) {
+                        cache.put(storageUrl, networkResponse.clone());
+                        return networkResponse;
+                    });
+                })
+            });
+
+        }, (msg) => {
+            console.log(msg);
+        })
+
+    }
 }
