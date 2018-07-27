@@ -14,6 +14,15 @@ const allCaches = [
 self.addEventListener('install', function (event) {
     event.waitUntil(
         caches.open(staticCacheName).then(function (cache) {
+            // cache big resources
+            cache.addAll([
+                'https://unpkg.com/leaflet@1.3.1/dist/leaflet.css',
+                'https://unpkg.com/leaflet@1.3.1/dist/leaflet.js',
+                'https://unpkg.com/leaflet@1.3.1/dist/images/marker-icon.png',
+                'https://unpkg.com/leaflet@1.3.1/dist/images/marker-shadow.png'
+            ]);
+
+            // cache critical resources
             return cache.addAll([
                 '/',
                 '/index.html',
@@ -23,11 +32,7 @@ self.addEventListener('install', function (event) {
                 '/js/picturehelper.js',
                 '/js/restaurant_info.js',
                 '/css/styles.css',
-                '/data/restaurants.json',
-                'https://unpkg.com/leaflet@1.3.1/dist/leaflet.css',
-                'https://unpkg.com/leaflet@1.3.1/dist/leaflet.js',
-                'https://unpkg.com/leaflet@1.3.1/dist/images/marker-icon.png',
-                'https://unpkg.com/leaflet@1.3.1/dist/images/marker-shadow.png'
+                '/data/restaurants.json'
             ]);
         }, function (msg) {
             console.log(msg);
